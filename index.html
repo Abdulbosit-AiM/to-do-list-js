@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>To Do List</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
 
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TodoList</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
     <header>
-        <h1>AiM's To Do List</h1>
+        <h1>AiM's Todo List</h1>
     </header>
-    
+
     <form>
-        <input type="text" name="todo" class="todo-input" autofocus autocomplete="off">
+        <input type="text" class="todo-input" />
         <button class="todo-button" type="submit">
             <i class="fas fa-plus-square"></i>
         </button>
-        
         <div class="select">
             <select name="todos" class="filter-todo">
                 <option value="all">All</option>
@@ -27,12 +28,13 @@
                 <option value="uncompleted">Uncompleted</option>
             </select>
         </div>
-    </form> 
-    
-    <main class="todo-container">
-        <ul class="todo-list">     </ul>
-    </main>
-    
-    <script  src="./script.js"></script>
+    </form>
+
+    <div class="todo-container">
+        <ul class="todo-list"></ul>
+    </div>
+
+    <script src="./app.js"></script>
 </body>
+
 </html>
