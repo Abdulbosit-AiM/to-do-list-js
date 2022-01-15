@@ -10,8 +10,17 @@ todoButton.addEventListener('click', addTodo)
 todoList.addEventListener('click', deleteCheck)
 filterOption.addEventListener('click', filterTodo)
 
-// Functions
+// disabling input so that user can't submit an empty string
+todoButton.disabled = true
+todoInput.onkeyup = () => {
+    if(todoInput.value.length > 0){
+        todoButton.disabled = false
+    } else {
+        todoButton.disabled = true
+    }
+}
 
+// Functions
 function addTodo(event){
     event.preventDefault()
 
@@ -40,7 +49,9 @@ function addTodo(event){
     todoList.appendChild(todoDiv)
 
     // Clear Todo Input Value
+    todoButton.disabled = true
     todoInput.value = ''
+
 }
 
 function deleteCheck(e) {
