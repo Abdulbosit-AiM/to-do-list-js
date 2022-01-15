@@ -12,7 +12,9 @@ body {
     color: white;
     font-family: 'Poppins', sans-serif;
 }
-
+h1 {
+    font-size: 3rem;
+}
 header, form {
     min-height: 20vh;
     display: flex;

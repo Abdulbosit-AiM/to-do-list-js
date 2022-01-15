@@ -5,9 +5,9 @@ const todoList = document.querySelector('.todo-list')
 const filterOption = document.querySelector('.filter-todo')
 
 // Event Listeners
-// document.addEventListener('DOMContentLoaded', getTodos)  
+document.addEventListener('DOMContentLoaded', getTodos)  
 todoButton.addEventListener('click', addTodo)
-todoList.addEventListener('click', deleteCheck)
+todoList.addEventListener('click', deleteTodo)
 filterOption.addEventListener('click', filterTodo)
 
 // disabling input so that user can't submit an empty string
@@ -33,6 +33,9 @@ function addTodo(event){
     newTodo.classList.add('todo-item')
     todoDiv.appendChild(newTodo)
 
+    // add todo to local storage
+    saveLocalTodos(todoInput.value)
+
     // Check Mark Button
     const completedButton = document.createElement('button')
     completedButton.innerHTML = '<i class="fas fa-check">'
@@ -54,12 +57,13 @@ function addTodo(event){
 
 }
 
-function deleteCheck(e) {
+function deleteTodo(e) {
     const item = e.target
     // delete todo
     if(item.classList[0] === 'trash-btn') {
         const todo = item.parentElement
         todo.classList.add('fall')
+        removeLocalTodos(todo)
         todo.addEventListener('transitionend', function(){
             todo.remove()
         })
@@ -94,4 +98,60 @@ function filterTodo(e){
                 }
         }
     })
+}
+// Local Storage manipulation
+
+function checkLocalStorage(){
+    let todos
+    if(localStorage.getItem('todos') === null) {
+        todos = []
+    }else {
+        todos = JSON.parse(localStorage.getItem('todos'))
+    }
+    return todos
+}
+
+function saveLocalTodos(todo){
+    let todos = checkLocalStorage()
+
+    todos.push(todo)
+    localStorage.setItem('todos', JSON.stringify(todos))
+}
+
+function getTodos() {
+    let todos = checkLocalStorage()
+
+    todos.forEach(function(todo){
+        const todoDiv = document.createElement('div')
+        todoDiv.classList.add('todo')
+
+        // Create li
+        const newTodo = document.createElement('li')
+        newTodo.innerText = todo
+        newTodo.classList.add('todo-item')
+        todoDiv.appendChild(newTodo)
+
+        // Check Mark Button
+        const completedButton = document.createElement('button')
+        completedButton.innerHTML = '<i class="fas fa-check">'
+        completedButton.classList.add('complete-btn')
+        todoDiv.appendChild(completedButton)
+
+        // Check Trash Button
+        const trashButton = document.createElement('button')
+        trashButton.innerHTML = '<i class="fas fa-trash">'
+        trashButton.classList.add('trash-btn')
+        todoDiv.appendChild(trashButton)
+
+        // Append To List
+        todoList.appendChild(todoDiv)
+
+    })
+}
+
+function removeLocalTodos(todo){
+    let todos = checkLocalStorage()
+    const todoIndex = todo.children[0].innerText
+    todos.splice(todos.indexOf(todoIndex), 1)
+    localStorage.setItem('todos', JSON.stringify(todos))
 }
